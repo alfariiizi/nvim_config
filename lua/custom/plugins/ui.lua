@@ -25,4 +25,10 @@ return {
     },
     main = 'ibl',
   },
+
+  --NOTE: Improve default vim.ui interfaces
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
 }
