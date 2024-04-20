@@ -76,9 +76,11 @@ return {
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
-          ['<C-n>'] = cmp.mapping.select_next_item(),
+          -- ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<A-j>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          -- ['<C-p>'] = cmp.mapping.select_prev_item(),
+          ['<A-k>'] = cmp.mapping.select_prev_item(),
 
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -133,7 +135,12 @@ return {
 
       -- `:` cmdline setup.
       cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
+        -- Get this solution from: https://github.com/hrsh7th/nvim-cmp/issues/809
+        mapping = cmp.mapping.preset.cmdline {
+          ['<Tab>'] = cmp.mapping.confirm { select = true },
+          ['<A-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+          ['<A-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+        },
         sources = cmp.config.sources({
           { name = 'path' },
         }, {

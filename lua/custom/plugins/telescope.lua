@@ -62,6 +62,10 @@ return {
         defaults = {
           mappings = {
             -- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            i = {
+              ['<A-j>'] = 'move_selection_next',
+              ['<A-k>'] = 'move_selection_previous',
+            },
           },
           -- configure to use ripgrep
           vimgrep_arguments = {
