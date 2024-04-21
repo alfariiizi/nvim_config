@@ -19,6 +19,20 @@ return {
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
+    -- local mini_animate = require 'mini.animate'
+    -- mini_animate.setup {
+    --   scroll = {
+    --     -- Whether to enable this animation
+    --     enable = true,
+    --
+    --     -- Timing of animation (how steps will progress in time)
+    --     timing = mini_animate.gen_timing.linear { duration = 50, unit = 'total' }, --<function: implements linear total 250ms animation duration>,
+    --
+    --     -- Subscroll generator based on total scroll
+    --     -- subscroll = --<function: implements equal scroll with at most 60 steps>,
+    --   },
+    -- }
+
     -- Simple and easy statusline.
     --  You could remove this setup call if you don't like it,
     --  and try some other statusline plugin
