@@ -32,6 +32,9 @@ return {
 
       -- Useful for sorting recent file
       { 'mollerhoj/telescope-recent-files.nvim' },
+
+      -- Import modules with ease
+      -- { 'piersolenski/telescope-import.nvim' },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -120,6 +123,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'recent-files')
+      -- pcall(require('telescope').load_extension, 'import')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
