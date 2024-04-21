@@ -1,6 +1,7 @@
 return {
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       {
@@ -207,6 +208,29 @@ return {
   { -- typescript
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {},
+    opts = {
+      complete_function_calls = true,
+      -- spawn additional tsserver instance to calculate diagnostics on it
+      separate_diagnostic_server = true,
+      -- "change"|"insert_leave" determine when the client asks the server about diagnostic
+      publish_diagnostic_on = 'insert_leave',
+      expose_as_code_action = {
+        'fix_all',
+        'add_missing_imports',
+        'remove_unused',
+        'remove_unused_imports',
+        'organize_imports',
+      },
+      tsserver_file_preferences = {
+        includeInlayParameterNameHints = 'all',
+        includeCompletionsForModuleExports = true,
+        includeCompletionsForImportStatements = true,
+        quotePreference = 'auto',
+      },
+      -- tsserver_format_options = {
+      --placeOpenBraceOnNewLineForControlBlocks = true;
+      -- insertSpaceBeforeTypeAnnotation = true;
+      -- },
+    },
   },
 }
