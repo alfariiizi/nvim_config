@@ -29,13 +29,13 @@ return {
     keys = {
       {
         'f',
-        '<cmd>HopWordAC<CR>',
+        '<cmd>HopChar1AC<CR>',
         mode = 'n',
         desc = 'Hop Word after cursor',
       },
       {
         'F',
-        '<cmd>HopWordBC<CR>',
+        '<cmd>HopChar1BC<CR>',
         mode = 'n',
         desc = 'Hop Word before cursor',
       },

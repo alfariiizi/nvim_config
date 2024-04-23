@@ -1,3 +1,14 @@
+local splitstring = function(inputstr, sep)
+  if sep == nil then
+    sep = '%s'
+  end
+  local t = {}
+  for str in string.gmatch(inputstr, '([^' .. sep .. ']+)') do
+    table.insert(t, str)
+  end
+  return t
+end
+
 return {
   --NOTE: Autocompletion
   {
@@ -55,6 +66,9 @@ return {
 
       -- For autocompletion on cmdline
       { 'hrsh7th/cmp-cmdline' },
+
+      -- Vscode-like pictograms for neovim lsp completion items
+      'onsails/lspkind.nvim',
     },
     config = function()
       -- See `:help cmp`
@@ -63,6 +77,20 @@ return {
       luasnip.config.setup {}
 
       cmp.setup {
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        performance = {
+          debounce = 0,
+          throttle = 0,
+          -- fetching_timeout = 100,
+          fetching_timeout = 1000,
+          -- confirm_resolve_timeout = 80,
+          confirm_resolve_timeout = 800,
+          async_budget = 500,
+          max_view_entries = 20,
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -122,6 +150,96 @@ return {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'lab.quick_data', keyword_length = 4 },
+        },
+        formatting = {
+          fields = {
+            cmp.ItemField.Abbr,
+            cmp.ItemField.Kind,
+            cmp.ItemField.Menu,
+          },
+          expandable_indicator = true,
+          format = function(entry, vim_item)
+            local item_with_kind = require('lspkind').cmp_format {
+              -- mode = 'symbol', -- show only symbol annotations
+              -- maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+              -- can also be a function to dynamically calculate max width such as
+              maxwidth = function()
+                return math.floor(0.45 * vim.o.columns)
+              end,
+              ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+              show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+              -- before = function(entry, vim_item)
+              --   -- vim_item.menu = ' ' .. (({ nvim_lsp = 'lsp', cmp_git = 'git' })[entry.source.name] or entry.source.name) .. ': ' .. vim_item.kind
+              --   -- vim_item.kind = nil
+              --
+              --   -- Show paths for auto imports with neovim nvim-cmp
+              --   -- Solution: https://stackoverflow.com/questions/72668920/how-to-show-paths-for-auto-imports-with-neovim-nvim-cmp
+              --   -- local completion_context = entry.completion_item.detail or entry.data.entry_names[1].data.moduleSpecifier or ''
+              --   local completion_context = entry.completion_item.detail
+              --   -- print('DEBUGPRINT[4]: autocompletion.lua:155: entry.completion_item=' .. vim.inspect(entry.completion_item))
+              --   DEBUGGING = entry.completion_item
+              --   if completion_context ~= nil and completion_context ~= '' then
+              --     -- vim_item.menu = entry.completion_item.detail
+              --     local cwd = string.sub(vim.fn.getcwd(), 2)
+              --     local home_dir = string.sub(vim.fn.expand '$HOME', 2)
+              --     if string.find(completion_context, cwd) then
+              --       completion_context = string.sub(completion_context, string.len(cwd) + 2, string.len(completion_context))
+              --     elseif string.find(completion_context, home_dir) then
+              --       completion_context = '~/' .. string.sub(completion_context, string.len(home_dir) + 2, string.len(completion_context))
+              --       -- else
+              --       --   completion_context = '/' .. completion_context
+              --     end
+              --
+              --     local truncated_context = string.sub(completion_context, 1, 30)
+              --     if truncated_context ~= completion_context then
+              --       truncated_context = truncated_context .. '...'
+              --     end
+              --     vim_item.menu = truncated_context
+              --   else
+              --     vim_item.menu = ({
+              --       nvim_lsp = '[LSP]',
+              --       luasnip = '[Snippet]',
+              --       buffer = '[Buffer]',
+              --       path = '[Path]',
+              --     })[entry.source.name]
+              --   end
+              --
+              --   vim_item.menu_hl_group = 'CmpItemAbbr'
+              --   return vim_item
+              -- end,
+            }(entry, vim_item)
+
+            -- local completion_context = entry.completion_item.detail
+
+            -- local firstline = splitstring(entry:get_completion_item().detail, '\n')
+            -- DEBUGGING = firstline
+
+            -- if completion_context ~= nil and completion_context ~= '' then
+            --   local truncated_context = string.sub(completion_context, 1, 30)
+            --   if truncated_context ~= completion_context then
+            --     truncated_context = truncated_context .. ' ...'
+            --   end
+            --   item_with_kind.menu = item_with_kind.menu .. ' ' .. truncated_context
+            -- end
+
+            -- DEBUGGING = entry:get_completion_item()
+            -- if entry:get_completion_item().detail ~= nil then
+            --   local lastIndex = entry:get_completion_item().detail:find '\n' or 1
+            --   -- local _, *first = entry:get_completion_item().detail:find(' from ') or 18
+            --   DEBUGGING = entry:get_completion_item().detail:sub(18, lastIndex)
+            --   item_with_kind.menu = entry:get_completion_item().detail:sub(18, lastIndex)
+            -- end
+
+            -- DEBUGGING = entry:get_completion_item().detail
+            -- DEBUGGING = entry.source.source
+            -- if entry.completion_item.data ~= nil and entry.completion_item.data.entryNames then
+            --   DEBUGGING = entry.completion_item.data.entryNames[1].source
+            -- end
+
+            item_with_kind.menu_hl_group = 'CmpItemAbbr'
+            return item_with_kind
+          end,
         },
       }
 
@@ -137,7 +255,8 @@ return {
       cmp.setup.cmdline(':', {
         -- Get this solution from: https://github.com/hrsh7th/nvim-cmp/issues/809
         mapping = cmp.mapping.preset.cmdline {
-          ['<Tab>'] = cmp.mapping.confirm { select = true },
+          -- ['<Tab>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping(cmp.mapping.confirm { select = true }, { 'i', 'c' }),
           ['<A-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
           ['<A-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
         },

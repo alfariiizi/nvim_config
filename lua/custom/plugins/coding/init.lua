@@ -62,4 +62,18 @@ return {
     -- not just the formal releases
     version = '*',
   },
+
+  -- {
+  -- 'metakirby5/codi.vim',
+  -- },
+  {
+    '0x100101/lab.nvim',
+    config = function()
+      require('lab').setup {
+        quick_data = {
+          enabled = true,
+        },
+      }
+    end,
+  },
 }
