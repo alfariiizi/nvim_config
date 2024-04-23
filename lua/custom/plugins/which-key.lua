@@ -24,9 +24,10 @@ return {
       require('which-key').register {
         -- [Leader]
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+        ['<leader>D'] = { name = '[D]ocument', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+        ['<leader>C'] = { name = '[C]onfiguration', _ = 'which_key_ignore' },
         ['<leader>W'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>m'] = { name = '[M]ason', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
@@ -34,6 +35,10 @@ return {
 
         -- [G]
         ['g?'] = { name = 'Print Debug', _ = 'which_key_ignore' },
+
+        -- [Local]
+        ['<localLeader>l'] = { name = '[L]atex', _ = 'which_key_ignore' },
+        ['<localLeader>o'] = { name = '[O]bsidian', _ = 'which_key_ignore' },
       }
     end,
   },
