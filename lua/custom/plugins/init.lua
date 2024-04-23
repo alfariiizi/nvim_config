@@ -3,8 +3,6 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  { import = 'custom.plugins.coding' },
-
   --NOTE: Autopairs and autotags
   {
     'windwp/nvim-autopairs',
@@ -98,4 +96,7 @@ return {
   {
     'mg979/vim-visual-multi',
   },
+
+  { import = 'custom.plugins.coding' },
+  { import = 'custom.plugins.lang' },
 }
