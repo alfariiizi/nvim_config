@@ -76,4 +76,5 @@ return {
 
   { import = 'custom.plugins.coding' },
   { import = 'custom.plugins.lang' },
+  { import = 'custom.plugins.ui' },
 }
