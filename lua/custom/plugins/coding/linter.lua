@@ -3,20 +3,15 @@ return {
   { -- Linting
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
-    keys = {
-      {
-        '<leader>cl',
-        function()
-          require('lint').try_lint()
-        end,
-        mode = 'n',
-        desc = '[L]int current buffer',
-      },
-    },
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        javascriptreact = { 'eslint_d' },
+        typescriptreact = { 'eslint_d' },
+        svelte = { 'eslint_d' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
@@ -50,21 +45,27 @@ return {
       -- lint.linters_by_ft['ruby'] = nil
       -- lint.linters_by_ft['terraform'] = nil
       -- lint.linters_by_ft['text'] = nil
-      lint.linters_by_ft['javascript'] = { 'eslint_d' }
-      lint.linters_by_ft['typescript'] = { 'eslint_d' }
-      lint.linters_by_ft['javascriptreact'] = { 'eslint_d' }
-      lint.linters_by_ft['typescriptreact'] = { 'eslint_d' }
-      lint.linters_by_ft['svelte'] = { 'eslint_d' }
+
+      -- lint.linters_by_ft['javascript'] = { 'eslint_d' }
+      -- lint.linters_by_ft['typescript'] = { 'eslint_d' }
+      -- lint.linters_by_ft['javascriptreact'] = { 'eslint_d' }
+      -- lint.linters_by_ft['typescriptreact'] = { 'eslint_d' }
+      -- lint.linters_by_ft['svelte'] = { 'eslint_d' }
 
       -- Create autocommand which carries out the actual linting
       -- on the specified events.
+
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
       vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
         group = lint_augroup,
         callback = function()
-          require('lint').try_lint()
+          lint.try_lint()
         end,
       })
+
+      vim.keymap.set('n', '<leader>cl', function()
+        lint.try_lint()
+      end, { desc = '[L]int current buffer' })
     end,
   },
 }
