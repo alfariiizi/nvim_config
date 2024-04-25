@@ -86,4 +86,10 @@ return {
     },
     opts = {},
   },
+
+  --NOTE: For parse json into json5 (json with comment)
+  {
+    'Joakker/lua-json5',
+    build = './install.sh',
+  },
 }
