@@ -40,4 +40,19 @@ return {
     'lewis6991/gitsigns.nvim',
     opts = {},
   },
+
+  {
+    'f-person/git-blame.nvim',
+    config = function()
+      -- This setter must be execute before the setup function
+      vim.g.gitblame_delay = 100
+      vim.g.gitblame_highlight_group = 'Comment'
+
+      require('gitblame').setup {
+        --Note how the `gitblame_` prefix is omitted in `setup`
+        enabled = false,
+      }
+      vim.keymap.set('n', '<leader>gb', '<cmd>GitBlameToggle<cr>', { desc = '[G]it [B]lame Toggle' })
+    end,
+  },
 }
