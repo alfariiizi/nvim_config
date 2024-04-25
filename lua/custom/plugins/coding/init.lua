@@ -76,4 +76,14 @@ return {
       }
     end,
   },
+
+  --NOTE: Catalyze your Fenced Markdown Code-block editing!
+  {
+    'AckslD/nvim-FeMaco.lua',
+    ft = { 'tex', 'plaintex', 'markdown' },
+    keys = {
+      { '<localleader>e', '<cmd>FeMaco<cr>', desc = '[E]dit with FeMaco' },
+    },
+    opts = {},
+  },
 }
