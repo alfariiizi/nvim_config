@@ -13,6 +13,7 @@ return {
   --NOTE: Autocompletion
   {
     'hrsh7th/nvim-cmp',
+    branch = 'main',
     -- event = 'InsertEnter', -- I need the cmp-cmdline. So the nvim-cmp need to load on start
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
@@ -90,6 +91,11 @@ return {
           confirm_resolve_timeout = 800,
           async_budget = 500,
           max_view_entries = 20,
+
+          -- Others
+          -- debounce = 500,
+          -- throttle = 550,
+          -- fetching_timeout = 80,
         },
         snippet = {
           expand = function(args)
@@ -147,7 +153,7 @@ return {
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp' },
+          { name = 'nvim_lsp', keyword_length = 2, max_item_count = 30 },
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'lab.quick_data', keyword_length = 4 },
