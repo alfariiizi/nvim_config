@@ -35,6 +35,8 @@ return {
 
       -- Import modules with ease
       -- { 'piersolenski/telescope-import.nvim' },
+
+      'andrew-george/telescope-themes',
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -70,13 +72,14 @@ return {
               ['<A-k>'] = 'move_selection_previous',
             },
           },
-          layout_strategy = 'horizontal',
-          layout_config = {
-            horizontal = {
-              prompt_position = 'top',
-            },
-          },
-          sorting_strategy = 'ascending',
+          -- layout_strategy = 'horizontal',
+          -- layout_config = {
+          --   horizontal = {
+          --     prompt_position = 'top',
+          --   },
+          -- },
+          -- sorting_strategy = 'ascending',
+
           -- configure to use ripgrep
           vimgrep_arguments = {
             'rg',
@@ -123,6 +126,28 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          themes = {
+            -- you can add regular telescope config
+            -- that you want to apply on this picker only
+            layout_config = {
+              horizontal = {
+                width = 0.8,
+                height = 0.7,
+              },
+            },
+            -- extension specific config
+            enable_previewer = true, -- (boolean) -> show/hide previewer window
+            enable_live_preview = false, -- (boolean) -> enable/disable live preview
+            ignore = { 'default', 'desert', 'elflord', 'habamax' },
+            -- (table) -> provide table of theme names to ignore
+            -- all builtin themes are ignored by default
+            persist = {
+              enabled = true, -- enable persisting last theme choice
+
+              -- override path to file that execute colorscheme command
+              -- path = vim.fn.stdpath 'config' .. '/lua/colorscheme.lua',
+            },
+          },
         },
       }
 
@@ -130,6 +155,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'recent-files')
+      pcall(require('telescope').load_extension, 'themes')
       -- pcall(require('telescope').load_extension, 'import')
 
       -- See `:help telescope.builtin`
@@ -174,6 +200,8 @@ return {
       vim.keymap.set('n', '<leader>Cn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[C]onfig: [N]eovim files' })
+
+      vim.keymap.set('n', '<leader>ut', '<cmd>Telescope themes<cr>', { desc = '[U]I: [T]hemes' })
     end,
   },
 }
