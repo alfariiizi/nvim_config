@@ -20,7 +20,9 @@ return {
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
-      { 'folke/neodev.nvim', opts = {} },
+      { 'folke/neodev.nvim', opts = {
+        library = { plugins = { 'nvim-dap-ui' }, types = true },
+      } },
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -105,7 +107,7 @@ return {
           --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-          map('<leader>d', vim.diagnostic.open_float, 'Show [D]iagnostic')
+          -- map('<leader>d', vim.diagnostic.open_float, 'Show [D]iagnostic')
           map('<leader>xD', '<cmd>Telescope diagnostics bufnr=0<cr>', 'Buffer [D]iagnostic')
 
           -- The following two autocommands are used to highlight references of the
