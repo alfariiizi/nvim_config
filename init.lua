@@ -297,7 +297,7 @@ require('lazy').setup({
 
 require 'custom.keymaps'
 
--- Place this on the first
+-- Place this on the last (Because the lazy.nvim need to load all theme first)
 -- This file 'current-theme' is generated from plugin: https://github.com/andrew-george/telescope-themes
 require 'current-theme'
 
