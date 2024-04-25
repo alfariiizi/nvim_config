@@ -24,6 +24,7 @@ return {
       require('which-key').register {
         -- [Leader]
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+        ['<leader>d'] = { name = '[D]ebug', _ = 'which_key_ignore' },
         ['<leader>D'] = { name = '[D]ocument', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
@@ -32,6 +33,7 @@ return {
         ['<leader>m'] = { name = '[M]ason', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
         ['<leader>x'] = { name = 'Fi[X] Wrong (Trouble)', _ = 'which_key_ignore' },
+        ['<leader>u'] = { name = '[U]I', _ = 'which_key_ignore' },
 
         -- [G]
         ['g?'] = { name = 'Print Debug', _ = 'which_key_ignore' },
