@@ -1,10 +1,10 @@
 return {
-  {
+  { -- Git command
     'tpope/vim-fugitive',
     cmd = { 'Git' },
   },
 
-  {
+  { -- Git menu (complex)
     'kdheepak/lazygit.nvim',
     cmd = {
       'LazyGit',
@@ -24,7 +24,7 @@ return {
     },
   },
 
-  {
+  { -- Git graph
     'rbong/vim-flog',
     lazy = true,
     cmd = { 'Flog', 'Flogsplit', 'Floggit' },
@@ -36,12 +36,12 @@ return {
     },
   },
 
-  {
+  { -- Git sign
     'lewis6991/gitsigns.nvim',
     opts = {},
   },
 
-  {
+  { -- Git blame
     'f-person/git-blame.nvim',
     config = function()
       -- This setter must be execute before the setup function
