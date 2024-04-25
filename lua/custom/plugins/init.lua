@@ -20,29 +20,6 @@ return {
     },
   },
 
-  --NOTE: Hop movement
-  {
-    'smoka7/hop.nvim',
-    version = '*',
-    keys = {
-      {
-        'f',
-        '<cmd>HopChar1AC<CR>',
-        mode = 'n',
-        desc = 'Hop Word after cursor',
-      },
-      {
-        'F',
-        '<cmd>HopChar1BC<CR>',
-        mode = 'n',
-        desc = 'Hop Word before cursor',
-      },
-    },
-    opts = {
-      -- keys = 'hklyuiopnm,qwertzxcvbasdgjf;',
-    },
-  },
-
   --NOTE: Neovim file explorer: edit your filesystem like a buffer
   --
   -- {
