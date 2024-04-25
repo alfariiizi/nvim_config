@@ -10,7 +10,7 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '<leader>e', '<cmd>Neotree toggle<cr>', desc = 'NeoTree' },
+    { '<leader>ue', '<cmd>Neotree toggle<cr>', desc = '[U]I: [E]xplorer (NeoTree)' },
     -- {
     --   '<leader>fe',
     --   function()
