@@ -86,29 +86,49 @@ return {
         window = {
           width = 'fit',
           padding = 0,
-          margin = { horizontal = 0 },
+          margin = { vertical = 0 },
+          placement = { horizontal = 'right', vertical = 'top' },
           overlap = {
-            borders = true,
-            winbar = true,
-            tabline = true,
+            borders = false,
+            winbar = false,
+            tabline = false,
+            statusline = false,
           },
-          -- placement = {
-          --   vertical = 'bottom',
-          -- },
         },
+        -- highlight = {
+        --   groups = {
+        --     InclineNormal = { guibg = 'none' },
+        --     InclineNormalNC = { guibg = 'none' },
+        --   },
+        -- },
         render = function(props)
           local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t') -- from incline docs (it get the name of file)
           local path = vim.fn.fnamemodify(vim.fn.expand '%:h', ':p:~:.') -- thanks to: https://www.reddit.com/r/neovim/comments/q2s3t1/comment/hfnevrm/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
           -- local filename = vim.api.nvim_buf_get_name(props.buf)
           local filename = path .. name
           local modified = vim.bo[props.buf].modified
+          local hl = vim.api.nvim_get_hl(0, { name = 'NormalFloat', link = false })
+          local bg = string.format('#bbbbbb', hl.bg)
+          local fg = '#111111'
+          -- return {
+          --   ' ',
+          --   filename,
+          --   modified and { ' *', guifg = '#888888', gui = 'bold' } or '',
+          --   ' ',
+          --   guibg = 'auto',
+          --   guifg = '#eeeeee',
+          -- }
           return {
-            ' ',
-            filename,
-            modified and { ' *', guifg = '#888888', gui = 'bold' } or '',
-            ' ',
-            guibg = 'auto',
-            guifg = '#eeeeee',
+            -- { '', guifg = bg },
+            {
+              { ' ', filename, ' ' },
+              guibg = bg,
+              guifg = fg,
+            },
+            modified and { '* ', guibg = bg, guifg = '#B22222', gui = 'bold' } or '',
+            -- { '', guifg = bg },
+            guibg = bg,
+            guifg = fg,
           }
         end,
       }
