@@ -3,6 +3,8 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  { import = 'custom.plugins.ui' }, -- The UI is important part. So it has to be first
+
   --NOTE: Autopairs and autotags
   {
     'windwp/nvim-autopairs',
@@ -76,5 +78,4 @@ return {
 
   { import = 'custom.plugins.coding' },
   { import = 'custom.plugins.lang' },
-  { import = 'custom.plugins.ui' },
 }
