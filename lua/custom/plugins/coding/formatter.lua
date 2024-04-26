@@ -50,7 +50,7 @@ return {
         html = { { 'prettierd', 'prettier' } },
         json = { { 'prettierd', 'prettier' } },
         yaml = { { 'prettierd', 'prettier' } },
-        markdown = { { 'prettierd', 'prettier' } },
+        markdown = { { 'markdownlint', 'prettierd', 'prettier' } },
         graphql = { { 'prettierd', 'prettier' } },
         tex = { 'latexindent' },
         plaintex = { 'latexindent' },
