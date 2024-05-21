@@ -32,7 +32,8 @@ return {
       delete_debug_prints = 'DeleteDebugPrints',
     },
   },
-  config = function()
+  config = function(_, opts)
+    require('debugprint').setup(opts)
     require('which-key').register {
       [leader] = { name = '[P]rint to Debug', _ = 'which_key_ignore' },
     }
