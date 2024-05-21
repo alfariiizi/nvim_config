@@ -26,6 +26,7 @@ return {
         includeInlayParameterNameHints = 'all',
         includeCompletionsForModuleExports = true,
         quotePreference = 'auto',
+        includeCompletionsForImportStatements = true,
       },
       tsserver_format_options = {
         allowIncompleteCompletions = false,
