@@ -18,7 +18,7 @@ set('n', '<leader>Ct', '<cmd>e $HOME/.tmux.conf<cr>', { desc = '[C]onfig: [T]mux
 set('n', '<leader>uw', '<cmd>set wrap!<cr>', { desc = '[U]I: [W]rap Toggle' })
 
 set('n', '<leader>-', '<cmd>split<cr>', { desc = '[-] Split Horizontal' })
-set('n', '<leader>|', '<cmd>vsplit<cmd>', { desc = '[|] Split Vertical' })
+set('n', '<leader>|', '<cmd>vsplit<cr>', { desc = '[|] Split Vertical' })
 
 -- [Fold]
 -- set('n', 'zR', require('ufo').openAllFolds)
