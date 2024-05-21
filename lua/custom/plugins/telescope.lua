@@ -74,6 +74,10 @@ return {
             i = {
               ['<A-j>'] = 'move_selection_next',
               ['<A-k>'] = 'move_selection_previous',
+              ['<C-S-v>'] = 'paste_register',
+            },
+            n = {
+              ['<C-S-v>'] = 'paste_register',
             },
           },
           -- layout_strategy = 'horizontal',
