@@ -76,6 +76,7 @@ return {
   },
   {
     'b0o/incline.nvim',
+    enabled = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
@@ -90,7 +91,7 @@ return {
           placement = { horizontal = 'right', vertical = 'top' },
           overlap = {
             borders = false,
-            winbar = false,
+            winbar = true,
             tabline = false,
             statusline = false,
           },
