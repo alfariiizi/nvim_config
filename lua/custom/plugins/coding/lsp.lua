@@ -174,6 +174,24 @@ return {
             },
           },
         },
+        -- angularls = {
+        --   cmd = { 'ngserver', '--stdio' },
+        --   -- filetypes = { 'javascript', 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
+        --   filetypes = { 'javascript', 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
+        --   root_dir = function(fname)
+        --     return require('lspconfig').util.root_pattern 'angular.json'(fname) or require('lspconfig').util.find_git_ancestor(fname)
+        --   end,
+        --   on_new_config = function(new_config, new_root_dir)
+        --     new_config.cmd = {
+        --       'ngserver',
+        --       '--stdio',
+        --       '--tsProbeLocations',
+        --       new_root_dir,
+        --       '--ngProbeLocations',
+        --       new_root_dir,
+        --     }
+        --   end,
+        -- },
         texlab = {
           keys = {
             { '<Leader>K', '<plug>(vimtex-doc-package)', desc = 'Vimtex Docs', silent = true },
