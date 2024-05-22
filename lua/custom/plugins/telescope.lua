@@ -74,6 +74,7 @@ return {
             i = {
               ['<A-j>'] = 'move_selection_next',
               ['<A-k>'] = 'move_selection_previous',
+              ['<C-S-v>'] = { '<C-r>+', type = 'command' },
             },
           },
           -- layout_strategy = 'horizontal',
