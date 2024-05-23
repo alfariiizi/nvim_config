@@ -20,6 +20,8 @@ set('n', '<leader>uw', '<cmd>set wrap!<cr>', { desc = '[U]I: [W]rap Toggle' })
 set('n', '<leader>-', '<cmd>split<cr>', { desc = '[-] Split Horizontal' })
 set('n', '<leader>|', '<cmd>vsplit<cr>', { desc = '[|] Split Vertical' })
 
+set('n', '<leader>\\', '<cmd>:call delete(swapname("."))<cr>', { desc = 'Delete current swapfile' })
+
 -- [Fold]
 -- set('n', 'zR', require('ufo').openAllFolds)
 -- set('n', 'zM', require('ufo').closeAllFolds)
