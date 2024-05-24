@@ -61,8 +61,7 @@ return {
           ascending = true, -- whether or not the field provided above will be sorted in ascending or descending order
         },
       }
-
-      vim.keymap.set('n', '<leader>st', '<cmd>Telescope toggleterm_manager<cr>', { desc = '[S]earch [T]oggleTerm' })
+      vim.keymap.set('n', [[<C-|>]], '<cmd>Telescope toggleterm_manager<cr>', { desc = 'ToggleTerm Manager' })
     end,
   },
 }
