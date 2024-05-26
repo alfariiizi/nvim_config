@@ -2,6 +2,9 @@
 
 local set = vim.keymap.set
 
+set({ 'n', 'v' }, 'j', 'gj')
+set({ 'n', 'v' }, 'k', 'gk')
+
 set('n', '<leader>l', '<cmd>Lazy<CR>', { desc = '[L]azy Menu' })
 set('n', '<leader>w', '<cmd>w<CR>', { desc = '[W]rite file (Save file)' })
 
