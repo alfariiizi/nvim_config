@@ -90,7 +90,7 @@ return {
           -- confirm_resolve_timeout = 80,
           confirm_resolve_timeout = 800,
           async_budget = 500,
-          max_view_entries = 20,
+          max_view_entries = 300,
 
           -- Others
           -- debounce = 500,
