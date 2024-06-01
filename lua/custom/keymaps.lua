@@ -13,7 +13,17 @@ set('n', '<C-d>', '<C-d>zz')
 set('n', 'G', 'Gzz')
 
 set('n', '<leader>;', '<cmd>e ./.env<CR>', { desc = 'Env File' })
-set('n', '<leader>,', '<C-^>', { desc = 'Open last opened file' })
+-- set('n', '<leader>,', '<C-^>', { desc = 'Open last opened file' })
+set('n', '<leader>,', function()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local buffers = vim.fn.getbufinfo { buflisted = 1 }
+  for i = #buffers, 1, -1 do
+    if buffers[i].bufnr ~= current_buf then
+      vim.api.nvim_set_current_buf(buffers[i].bufnr)
+      return
+    end
+  end
+end, { desc = 'Open last opened active buffer' })
 
 set('n', '<leader>Cz', '<cmd>e $HOME/.zshrc<cr>', { desc = '[C]onfig: [Z]shrc' })
 set('n', '<leader>Ct', '<cmd>e $HOME/.tmux.conf<cr>', { desc = '[C]onfig: [T]mux' })
