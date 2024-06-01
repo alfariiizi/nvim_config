@@ -78,14 +78,15 @@ return {
   },
 
   --NOTE: Catalyze your Fenced Markdown Code-block editing!
-  {
-    'AckslD/nvim-FeMaco.lua',
-    ft = { 'tex', 'plaintex', 'markdown' },
-    keys = {
-      { '<localleader>e', '<cmd>FeMaco<cr>', desc = '[E]dit with FeMaco' },
-    },
-    opts = {},
-  },
+  --
+  -- {
+  --   'AckslD/nvim-FeMaco.lua',
+  --   ft = { 'tex', 'plaintex', 'markdown' },
+  --   keys = {
+  --     { '<localleader>e', '<cmd>FeMaco<cr>', desc = '[E]dit with FeMaco' },
+  --   },
+  --   opts = {},
+  -- },
 
   --NOTE: For parse json into json5 (json with comment)
   {
