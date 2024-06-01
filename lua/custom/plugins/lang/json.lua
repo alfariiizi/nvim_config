@@ -7,11 +7,6 @@ return {
       end
     end,
   },
-  {
-    'b0o/SchemaStore.nvim',
-    lazy = true,
-    version = false, -- last release is way too old
-  },
   { -- For parse json into json5 (json with comment)
     'Joakker/lua-json5',
     build = './install.sh',
