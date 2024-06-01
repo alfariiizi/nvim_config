@@ -199,6 +199,24 @@ return {
         },
       }
 
+      vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
+      vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+      local border = {
+        { '🭽', 'FloatBorder' },
+        { '▔', 'FloatBorder' },
+        { '🭾', 'FloatBorder' },
+        { '▕', 'FloatBorder' },
+        { '🭿', 'FloatBorder' },
+        { '▁', 'FloatBorder' },
+        { '🭼', 'FloatBorder' },
+        { '▏', 'FloatBorder' },
+      }
+      -- LSP settings (for overriding per client)
+      local handlers = {
+        ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+        ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+      }
+
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
@@ -223,6 +241,7 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.handlers = handlers
             require('lspconfig')[server_name].setup(server)
           end,
         },
