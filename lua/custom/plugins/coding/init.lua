@@ -63,11 +63,9 @@ return {
     version = '*',
   },
 
-  -- {
-  -- 'metakirby5/codi.vim',
-  -- },
   {
     '0x100101/lab.nvim',
+    enabled = false,
     config = function()
       require('lab').setup {
         quick_data = {

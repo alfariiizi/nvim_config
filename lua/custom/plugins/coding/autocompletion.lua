@@ -157,6 +157,7 @@ return {
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'lab.quick_data', keyword_length = 4 },
+          { name = 'otter' },
         },
         formatting = {
           fields = {
