@@ -174,12 +174,13 @@ return {
             },
           },
         },
-        eslint = {
-          settings = {
-            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-            workingDirectories = { mode = 'auto' },
-          },
-        },
+        -- I got this from Lazyvim
+        -- eslint = {
+        --   settings = {
+        --     -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+        --     workingDirectories = { mode = 'auto' },
+        --   },
+        -- },
         -- I got this from Lazyvim
         jsonls = {
           -- lazy-load schemastore when needed
