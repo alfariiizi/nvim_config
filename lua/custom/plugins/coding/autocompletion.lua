@@ -153,7 +153,7 @@ return {
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp', keyword_length = 2, max_item_count = 30 },
+          { name = 'nvim_lsp', keyword_length = 2, max_item_count = 100 },
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'lab.quick_data', keyword_length = 4 },
