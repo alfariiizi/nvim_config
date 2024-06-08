@@ -121,7 +121,8 @@ function telescopePickers.prettyFilesPicker(pickerAndOptions)
       return displayer {
         { icon, iconHighlight },
         tailForDisplay,
-        { pathToDisplay, 'TelescopeResultsComment' },
+        -- { pathToDisplay, 'TelescopeResultsComment' },
+        { pathToDisplay, 'Comment' },
       }
     end
 
@@ -303,7 +304,8 @@ function telescopePickers.prettyBuffersPicker(localOptions)
         { icon, iconHighlight },
         tailForDisplay,
         { '(' .. entry.bufnr .. ')', 'TelescopeResultsNumber' },
-        { path, 'TelescopeResultsComment' },
+        -- { path, 'TelescopeResultsComment' },
+        { path, 'Comment' },
       }
     end
 
@@ -419,7 +421,8 @@ function telescopePickers.prettyWorkspaceSymbols(localOptions)
         { entry.symbol_type:lower(), 'TelescopeResultsVariable' },
         { entry.symbol_name, 'TelescopeResultsConstant' },
         tailForDisplay,
-        { pathToDisplay, 'TelescopeResultsComment' },
+        -- { pathToDisplay, 'TelescopeResultsComment' },
+        { pathToDisplay, 'Comment' },
       }
     end
 

@@ -185,6 +185,18 @@ return {
       vim.keymap.set('n', '<leader>sb', function()
         -- builtin.buffers { sort_mru = true, ignore_current_buffer = true }
         require('custom.module.telescope-picker').prettyBuffersPicker {
+          -- initial_mode = 'normal',
+          attach_mappings = function(prompt_bufnr, map)
+            local delete_buf = function()
+              local action_state = require 'telescope.actions.state'
+              local current_picker = action_state.get_current_picker(prompt_bufnr)
+              current_picker:delete_selection(function(selection)
+                vim.api.nvim_buf_delete(selection.bufnr, { force = true })
+              end)
+            end
+            map('i', '<c-d>', delete_buf)
+            return true
+          end,
           sort_mru = true,
           ignore_current_buffer = true,
         }
