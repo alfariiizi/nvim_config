@@ -23,8 +23,8 @@ return {
         delete_debug_prints = leader .. 'd',
       },
       visual = {
-        variable_below = leader .. 'v',
-        variable_above = leader .. 'V',
+        variable_below = leader .. 'p',
+        variable_above = leader .. 'P',
       },
     },
     commands = {
