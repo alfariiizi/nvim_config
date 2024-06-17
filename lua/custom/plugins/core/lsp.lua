@@ -191,10 +191,24 @@ return {
             },
           },
         },
-        tailwindcss = {},
+        -- tailwindcss = {},
         texlab = {
           keys = {
             { '<Leader>K', '<plug>(vimtex-doc-package)', desc = 'Vimtex Docs', silent = true },
+          },
+        },
+        vtls = {
+          settings = {
+            typescript = {
+              inlayHints = {
+                parameterNames = { enabled = 'literals' },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+              },
+            },
           },
         },
       }

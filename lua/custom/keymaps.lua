@@ -12,6 +12,10 @@ set('n', '<C-u>', '<C-u>zz')
 set('n', '<C-d>', '<C-d>zz')
 set('n', 'G', 'Gzz')
 
+-- Paste will not affect register
+-- Try it: Yank something   Select other thing (in visual mode)   Hit "p"   Select other thing   Hit "p" again.
+set('x', 'p', '"_dP')
+
 set('n', '<leader>;', '<cmd>e ./.env<CR>', { desc = 'Env File' })
 set('n', '<leader>,', '<C-^>', { desc = 'Open last opened file' })
 -- set('n', '<leader>,', function()
