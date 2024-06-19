@@ -197,7 +197,7 @@ return {
             { '<Leader>K', '<plug>(vimtex-doc-package)', desc = 'Vimtex Docs', silent = true },
           },
         },
-        vtls = {
+        vtsls = {
           settings = {
             typescript = {
               inlayHints = {
