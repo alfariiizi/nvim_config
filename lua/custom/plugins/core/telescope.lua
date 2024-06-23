@@ -142,7 +142,7 @@ return {
             },
             -- extension specific config
             enable_previewer = true, -- (boolean) -> show/hide previewer window
-            enable_live_preview = false, -- (boolean) -> enable/disable live preview
+            enable_live_preview = true, -- (boolean) -> enable/disable live preview
             ignore = { 'default', 'desert', 'elflord', 'habamax' },
             -- (table) -> provide table of theme names to ignore
             -- all builtin themes are ignored by default
