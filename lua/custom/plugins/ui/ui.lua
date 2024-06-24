@@ -222,6 +222,47 @@ return {
           lualine_y = { 'progress' },
           lualine_z = { 'location' },
         },
+        inactive_sections = {
+          lualine_a = {
+            function()
+              return 'INACTIVE'
+            end,
+          },
+          lualine_c = {},
+        },
+        inactive_winbar = {
+          lualine_b = {
+            -- separator = { left = '', right = '' },
+            -- right_separator = '',
+            -- left_padding = 2,
+            {
+              'filetype',
+              icon_only = true,
+              separator = { left = '', right = '' },
+              padding = { right = 1, left = 1 },
+            },
+            {
+              'filename',
+              separator = { left = '', right = '' },
+              padding = { right = 1, left = 0 },
+            },
+          },
+          lualine_y = {
+            {
+              function()
+                local file_path = vim.fn.expand '%:p'
+                local relative_path = vim.fn.fnamemodify(file_path, ':.')
+                local directory_path = vim.fn.fnamemodify(relative_path, ':h')
+                return '  ' .. directory_path
+              end,
+              separator = { left = '', right = '' },
+              -- color = {
+              --   -- fg = '#b0b4ca',
+              --   fg = colors.white,
+              -- },
+            },
+          },
+        },
       }
 
       return opts
