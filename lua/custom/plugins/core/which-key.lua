@@ -17,8 +17,23 @@ return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
+    opts = {
+      triggers_nowait = {
+        -- marks
+        ';',
+        '`',
+        "'",
+        'g`',
+        "g'",
+        -- registers
+        '"',
+        '<c-r>',
+        -- spelling
+        'z=',
+      },
+    },
+    config = function(_, opts) -- This is the function that runs, AFTER loading
+      require('which-key').setup(opts)
 
       -- Document existing key chains
       require('which-key').register {
@@ -35,6 +50,9 @@ return {
 
         -- [G]
         ['g?'] = { name = 'Print Debug', _ = 'which_key_ignore' },
+
+        -- [F]
+        ['<leader>f'] = { name = 'Movement', _ = 'which_key_ignore' },
 
         -- [Local]
         ['<localLeader>l'] = { name = '[L]atex', _ = 'which_key_ignore' },

@@ -1,8 +1,16 @@
 -- If there are overlapping keymaps, this keymap will win
 
+-- [[ It's for long configuration keymap  ]]
+require 'custom.keymap-alternate-file'
+
+-- [[ It's for short configuration keymap  ]]
+
 local set = vim.keymap.set
 
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+set('n', ';', '<cmd>WhichKey `<cr>', { noremap = true })
+set('n', ';;', '``', { noremap = true })
 
 -- Diagnostic keymaps
 set('n', '[d', vim.diagnostic.goto_next, { desc = 'Go to previous [D]iagnostic message' })
@@ -42,7 +50,9 @@ set('n', 'G', 'Gzz')
 set('x', 'p', '"_dP')
 
 set('n', '<leader>;', '<cmd>e ./.env<CR>', { desc = 'Env File' })
-set('n', '<leader>,', '<C-^>', { desc = 'Open last opened file' })
+-- set('n', '<leader>,', '<C-^>', { desc = 'Open last opened file' })
+-- set('n', '<leader>,', '<leader>sb<cr>', { desc = 'Open last opened file' })
+
 -- set('n', '<leader>,', function()
 --   local current_buf = vim.api.nvim_get_current_buf()
 --   local buffers = vim.fn.getbufinfo { buflisted = 1 }

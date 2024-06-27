@@ -11,5 +11,8 @@ return {
   },
   config = function()
     require('icon-picker').setup { disable_legacy_commands = true }
+    require('which-key').register {
+      ['<leader>i'] = { name = '[I]con Picker', _ = 'which_key_ignore' },
+    }
   end,
 }
