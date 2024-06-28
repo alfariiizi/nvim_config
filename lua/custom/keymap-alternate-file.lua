@@ -47,4 +47,4 @@ local function switch_to_last_available_buffer()
 end
 
 -- Map Ctrl-^ to the new function using Lua
-vim.api.nvim_set_keymap('n', '<leader>,', '', { noremap = true, callback = switch_to_last_available_buffer })
+vim.keymap.set('n', '<leader>,', '', { noremap = true, callback = switch_to_last_available_buffer })
