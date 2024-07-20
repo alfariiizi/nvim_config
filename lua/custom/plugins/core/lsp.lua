@@ -127,9 +127,6 @@ return {
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.
-          vim.keymap.del('n', 'grr') -- reference
-          vim.keymap.del('n', 'gra') -- code action
-          vim.keymap.del('n', 'grn') -- rename
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.

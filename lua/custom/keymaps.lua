@@ -6,11 +6,16 @@ require 'custom.keymap-alternate-file'
 -- [[ It's for short configuration keymap  ]]
 
 local set = vim.keymap.set
+local del = vim.keymap.del
 
 set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 set('n', ';', '<cmd>WhichKey `<cr>', { noremap = true })
 set('n', ';;', '``', { noremap = true })
+
+del('n', 'grr') -- reference
+del('n', 'gra') -- code action
+del('n', 'grn') -- rename
 
 -- Diagnostic keymaps
 set('n', '[d', vim.diagnostic.goto_next, { desc = 'Go to previous [D]iagnostic message' })
