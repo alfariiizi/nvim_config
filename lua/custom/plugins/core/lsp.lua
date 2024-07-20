@@ -17,6 +17,67 @@ return {
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
+
+      {
+        'folke/neoconf.nvim',
+        cmd = 'Neoconf',
+        opts = {},
+      },
+
+      -- {
+      --   'yioneko/nvim-vtsls',
+      --   config = function()
+      --     require('vtsls').config {
+      --       settings = {
+      --         vtsls = {
+      --           experimental = {
+      --             completion = {
+      --               enableServerSideFuzzyMatch = true,
+      --               entriesLimit = 100,
+      --             },
+      --           },
+      --         },
+      --         typescript = {
+      --           inlayHints = {
+      --             parameterNames = { enabled = 'literals' },
+      --             parameterTypes = { enabled = true },
+      --             variableTypes = { enabled = true },
+      --             propertyDeclarationTypes = { enabled = true },
+      --             functionLikeReturnTypes = { enabled = true },
+      --             enumMemberValues = { enabled = true },
+      --           },
+      --           tsserver = {
+      --             maxTsServerMemory = 5120,
+      --           },
+      --         },
+      --       },
+      --       -- customize handlers for commands
+      --       handlers = {
+      --         source_definition = function(err, locations) end,
+      --         file_references = function(err, locations) end,
+      --         code_action = function(err, actions) end,
+      --       },
+      --       -- automatically trigger renaming of extracted symbol
+      --       refactor_auto_rename = true,
+      --       refactor_move_to_file = {
+      --         -- If dressing.nvim is installed, telescope will be used for selection prompt. Use this to customize
+      --         -- the opts for telescope picker.
+      --         telescope_opts = function(items, default) end,
+      --       },
+      --     }
+      --
+      --     -- [[ Handler for codelens command ]]
+      --     vim.lsp.commands['editor.action.showReferences'] = function(command, ctx)
+      --       local locations = command.arguments[3]
+      --       local client = vim.lsp.get_client_by_id(ctx.client_id)
+      --       if locations and #locations > 0 then
+      --         local items = vim.lsp.util.locations_to_items(locations, client.offset_encoding)
+      --         vim.fn.setloclist(0, {}, ' ', { title = 'References', items = items, context = ctx })
+      --         vim.api.nvim_command 'lopen'
+      --       end
+      --     end
+      --   end,
+      -- },
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -87,7 +148,7 @@ return {
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>cr', vim.lsp.buf.rename, '[R]ename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
@@ -169,13 +230,6 @@ return {
           },
         },
         -- I got this from Lazyvim
-        -- eslint = {
-        --   settings = {
-        --     -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-        --     workingDirectories = { mode = 'auto' },
-        --   },
-        -- },
-        -- I got this from Lazyvim
         jsonls = {
           -- lazy-load schemastore when needed
           on_new_config = function(new_config)
@@ -197,17 +251,55 @@ return {
             { '<Leader>K', '<plug>(vimtex-doc-package)', desc = 'Vimtex Docs', silent = true },
           },
         },
+        tsserver = {
+          enabled = false,
+        },
         vtsls = {
+          -- explicitly add default filetypes, so that we can extend
+          -- them in related extras
+          filetypes = {
+            'javascript',
+            'javascriptreact',
+            'javascript.jsx',
+            'typescript',
+            'typescriptreact',
+            'typescript.tsx',
+          },
           settings = {
+            complete_function_calls = true,
+            vtsls = {
+              enableMoveToFileCodeAction = true,
+              autoUseWorkspaceTsdk = true,
+              experimental = {
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                  entriesLimit = 200,
+                },
+              },
+            },
             typescript = {
+              tsserver = {
+                maxTsServerMemory = 5120,
+              },
+              updateImportsOnFileMove = { enabled = 'always' },
+              suggest = {
+                completeFunctionCalls = true,
+              },
               inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
                 parameterNames = { enabled = 'literals' },
                 parameterTypes = { enabled = true },
-                variableTypes = { enabled = true },
                 propertyDeclarationTypes = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                enumMemberValues = { enabled = true },
+                variableTypes = { enabled = false },
               },
+            },
+          },
+          -- I got this from Lazyvim
+          eslint = {
+            settings = {
+              -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+              workingDirectories = { mode = 'auto' },
             },
           },
         },

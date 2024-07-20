@@ -24,8 +24,8 @@ return {
       },
     }
 
-    require('which-key').register {
-      [prefix] = { name = '[N]otes', _ = 'which_key_ignore' },
+    require('which-key').add {
+      { prefix, group = '[N]otes' },
     }
     vim.keymap.set('n', prefix .. 'n', '<cmd>Flote<cr>', { desc = 'Project Notes' })
     vim.keymap.set('n', prefix .. 'g', '<cmd>Flote global<cr>', { desc = 'Global Notes' })

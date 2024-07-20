@@ -17,46 +17,49 @@ return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    opts = {
-      triggers_nowait = {
-        -- marks
-        ';',
-        '`',
-        "'",
-        'g`',
-        "g'",
-        -- registers
-        '"',
-        '<c-r>',
-        -- spelling
-        'z=',
-      },
-    },
     config = function(_, opts) -- This is the function that runs, AFTER loading
-      require('which-key').setup(opts)
+      require('which-key').setup {
+        win = {
+          no_overlap = false,
+          wo = {
+            winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+          },
+        },
+        triggers_nowait = {
+          -- marks
+          ';',
+          '`',
+          "'",
+          'g`',
+          "g'",
+          -- registers
+          '"',
+          '<c-r>',
+          -- spelling
+          'z=',
+        },
+      }
 
-      -- Document existing key chains
-      require('which-key').register {
-        -- [Leader]
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ebug', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>C'] = { name = '[C]onfiguration', _ = 'which_key_ignore' },
-        ['<leader>m'] = { name = '[M]ason', _ = 'which_key_ignore' },
-        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-        ['<leader>x'] = { name = 'Fi[X] Wrong (Trouble)', _ = 'which_key_ignore' },
-        ['<leader>u'] = { name = '[U]I', _ = 'which_key_ignore' },
+      require('which-key').add {
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>d', group = '[D]ebug' },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>C', group = '[C]onfiguration' },
+        { '<leader>m', group = '[M]ason' },
+        { '<leader>g', group = '[G]it' },
+        { '<leader>x', group = 'Fi[X] Wrong (Trouble)' },
+        { '<leader>u', group = '[U]I' },
 
         -- [G]
-        ['g?'] = { name = 'Print Debug', _ = 'which_key_ignore' },
+        { 'g?', group = 'Print Debug' },
 
         -- [F]
-        ['<leader>f'] = { name = 'Movement', _ = 'which_key_ignore' },
+        { '<leader>f', group = 'Movement' },
 
         -- [Local]
-        ['<localLeader>l'] = { name = '[L]atex', _ = 'which_key_ignore' },
-        ['<localLeader>o'] = { name = '[O]bsidian', _ = 'which_key_ignore' },
+        { '<localLeader>l', group = '[L]atex' },
+        { '<localLeader>o', group = '[O]bsidian' },
       }
     end,
   },

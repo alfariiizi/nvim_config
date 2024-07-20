@@ -21,9 +21,20 @@ local function should_include_buffer(buf)
   local buftype = vim.bo[buf].buftype
   local bufname = vim.api.nvim_buf_get_name(buf)
 
-  -- Exclude terminal, help, quickfix, and unnamed buffers
-  if buftype == 'terminal' or buftype == 'help' or buftype == 'quickfix' or bufname == '' then
-    return false
+  -- Define the buffer types and names to exclude
+  local exclude_types = { 'terminal', 'help', 'quickfix', 'neo-tree', 'Neotree', 'neotree' }
+  local exclude_names = { '' } -- To exclude unnamed buffers
+
+  -- Check if the buffer type or name should be excluded
+  for _, etype in ipairs(exclude_types) do
+    if buftype == etype then
+      return false
+    end
+  end
+  for _, ename in ipairs(exclude_names) do
+    if bufname == ename then
+      return false
+    end
   end
 
   -- Check if the buffer's file is in the current working directory

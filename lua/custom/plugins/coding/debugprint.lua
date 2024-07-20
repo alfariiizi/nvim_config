@@ -34,8 +34,8 @@ return {
   },
   config = function(_, opts)
     require('debugprint').setup(opts)
-    require('which-key').register {
-      [leader] = { name = '[P]rint to Debug', _ = 'which_key_ignore' },
+    require('which-key').add {
+      { leader, group = '[P]rint to Debug' },
     }
   end,
 }
