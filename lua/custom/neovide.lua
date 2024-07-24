@@ -1,6 +1,7 @@
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
-  vim.o.guifont = 'JetBrainsMono Nerd Font:h12' -- text below applies for VimScript
+  -- vim.o.guifont = 'JetBrainsMono Nerd Font:h12' -- text below applies for VimScript
+
   -- vim.g.neovide_refresh_rate = 60
   vim.g.neovide_confirm_quit = true
   vim.g.neovide_remember_window_size = false
