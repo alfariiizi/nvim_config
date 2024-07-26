@@ -2,7 +2,7 @@ return {
   --NOTE: Autoformat
   {
     'stevearc/conform.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'LspAttach', 'BufReadPost', 'BufNewFile' },
     lazy = false,
     -- keys = {
     --   {
@@ -40,8 +40,15 @@ return {
         format_on_save = {
           lsp_fallback = true,
           async = false,
-          timeout_ms = 1000,
+          timeout_ms = 3000,
         },
+      }
+
+      conform.format { async = true, lsp_fallback = true }
+
+      -- Customise the default "prettier" command to format Markdown files as well
+      conform.formatters.prettier = {
+        prepend_args = { '--prose-wrap', 'always' },
       }
 
       vim.keymap.set({ 'n', 'v' }, '<leader>cf', function()
