@@ -14,6 +14,35 @@ return {
       open_mapping = [[<c-\>]],
       direction = 'float', --'horizontal' | 'vertical' | 'tab' | 'float'
     },
+    config = function(_, opts)
+      require('toggleterm').setup(opts)
+
+      local Terminal = require('toggleterm.terminal').Terminal
+      local gitui = Terminal:new {
+        cmd = 'gitui',
+        direction = 'float',
+        on_exit = function(term, job, exit_code, name)
+          term:close()
+        end,
+      }
+      function _GITUI_TOGGLE()
+        gitui:toggle()
+      end
+      vim.keymap.set('n', '<leader>gu', '<cmd>lua _GITUI_TOGGLE()<CR>', { noremap = true, silent = true })
+      -- vim.keymap.set('n', '<leader>gu', ':ToggleTerm direction=float<CR>gitui<CR>', { noremap = true, silent = true })
+    end,
+  },
+
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- required
+      'sindrets/diffview.nvim', -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      'nvim-telescope/telescope.nvim', -- optional
+    },
+    config = true,
   },
 
   -- Toggle Term Manager
