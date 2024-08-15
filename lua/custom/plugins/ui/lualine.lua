@@ -15,14 +15,17 @@ return {
 
     local bubbles_theme = {
       normal = {
-        a = { fg = colors.black, bg = colors.violet },
-        b = { fg = colors.white, bg = colors.grey },
+        -- a = { fg = colors.black, bg = colors.violet },
+        -- b = { fg = colors.white, bg = colors.grey },
+        -- c = { fg = colors.white },
+        a = { fg = colors.violet, bg = 'none' },
+        b = { fg = colors.white, bg = 'none' },
         c = { fg = colors.white },
       },
 
-      insert = { a = { fg = colors.black, bg = colors.blue } },
-      visual = { a = { fg = colors.black, bg = colors.cyan } },
-      replace = { a = { fg = colors.black, bg = colors.red } },
+      insert = { a = { fg = colors.blue, bg = 'none' } },
+      visual = { a = { fg = colors.cyan, bg = 'none' } },
+      replace = { a = { fg = colors.red, bg = 'none' } },
 
       inactive = {
         a = { fg = colors.white, bg = colors.black },
@@ -50,12 +53,12 @@ return {
           {
             'filetype',
             icon_only = true,
-            separator = { left = '', right = '' },
+            -- separator = { left = '', right = '' },
             padding = { right = 1, left = 1 },
           },
           {
             'filename',
-            separator = { left = '', right = '' },
+            -- separator = { left = '', right = '' },
             padding = { right = 1, left = 0 },
           },
         },
@@ -67,7 +70,7 @@ return {
               local directory_path = vim.fn.fnamemodify(relative_path, ':h')
               return '  ' .. directory_path
             end,
-            separator = { left = '', right = '' },
+            -- separator = { left = '', right = '' },
             -- color = {
             --   -- fg = '#b0b4ca',
             --   fg = colors.white,

@@ -47,6 +47,9 @@ return {
       conform.format { async = true, lsp_fallback = true }
 
       -- Customise the default "prettier" command to format Markdown files as well
+      conform.formatters.prettierd = {
+        prepend_args = { '--prose-wrap', 'always' },
+      }
       conform.formatters.prettier = {
         prepend_args = { '--prose-wrap', 'always' },
       }

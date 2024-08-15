@@ -27,6 +27,11 @@ return {
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
+      {
+        'nvim-telescope/telescope-file-browser.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+      },
+
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
 
@@ -161,6 +166,7 @@ return {
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'recent-files')
       pcall(require('telescope').load_extension, 'themes')
+      pcall(require('telescope').load_extension, 'file_browser')
       -- pcall(require('telescope').load_extension, 'import')
 
       local telescopePickers = require 'custom.module.telescope-picker'
@@ -230,6 +236,8 @@ return {
       end, { desc = '[C]onfig: [N]eovim files' })
 
       vim.keymap.set('n', '<leader>ut', '<cmd>Telescope themes<cr>', { desc = '[U]I: [T]hemes' })
+
+      vim.keymap.set('n', '<leader>sf', '<cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[S]earch [F]ile Browser' })
     end,
   },
 }

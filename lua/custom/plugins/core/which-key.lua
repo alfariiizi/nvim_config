@@ -25,14 +25,16 @@ return {
         -- So... I disable trigger for 'x' (visual mode) and 't' (terminal mode).
         -- Reason for 'x' mode: I used to <c-d> and <c-u> after I enter the x mode
         -- Reason for 't' mode: Terminal based app like lazygit use <esc> to close, but which-key will be force to use <esc> as entering normal mode.
-        { '<auto>', mode = 'nisoc' },
+        { '<auto>', mode = 'nixsoc' },
       },
-      win = {
-        no_overlap = false,
-        wo = {
-          winblend = 20, -- value between 0-100 0 for fully opaque and 100 for fully transparent
-        },
-      },
+      colors = false,
+      -- It will make the transparancy broken
+      -- win = {
+      --   no_overlap = false,
+      --   wo = {
+      --     winblend = 90, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+      --   },
+      -- },
       -- triggers_nowait = {
       --   -- marks
       --   ';',

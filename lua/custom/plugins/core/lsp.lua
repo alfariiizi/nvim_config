@@ -10,13 +10,39 @@ return {
           { '<leader>mm', '<cmd>Mason<CR>', desc = '[M]ason [M]enu' },
           { '<leader>mu', '<cmd>MasonUpdate<CR>', desc = '[M]ason [U]pdate' },
         },
+        config = function()
+          require('mason').setup {
+            ui = {
+              border = 'rounded', -- or "single", "double", "shadow", etc.
+            },
+          }
+        end,
       },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        opts = {
+          notification = {
+            -- Options related to the notification window and buffer
+            window = {
+              -- https://github.com/j-hui/fidget.nvim/issues/240
+              winblend = 0,
+              border = 'none', -- Border around the notification window
+              zindex = 45, -- Stacking priority of the notification window
+              max_width = 0, -- Maximum width of the notification window
+              max_height = 0, -- Maximum height of the notification window
+              x_padding = 1, -- Padding from right edge of window boundary
+              y_padding = 0, -- Padding from bottom edge of window boundary
+              align = 'bottom', -- How to align the notification window
+              relative = 'editor', -- What the notification window position is relative to
+            },
+          },
+        },
+      },
 
       {
         'folke/neoconf.nvim',
@@ -170,6 +196,7 @@ return {
           --    See `:help CursorHold` for information about when this is executed
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
+
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -273,7 +300,7 @@ return {
               experimental = {
                 completion = {
                   enableServerSideFuzzyMatch = true,
-                  entriesLimit = 200,
+                  entriesLimit = 80,
                 },
               },
             },
@@ -305,23 +332,13 @@ return {
         },
       }
 
-      vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
-      vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
-      local border = {
-        { '🭽', 'FloatBorder' },
-        { '▔', 'FloatBorder' },
-        { '🭾', 'FloatBorder' },
-        { '▕', 'FloatBorder' },
-        { '🭿', 'FloatBorder' },
-        { '▁', 'FloatBorder' },
-        { '🭼', 'FloatBorder' },
-        { '▏', 'FloatBorder' },
-      }
-      -- LSP settings (for overriding per client)
-      local handlers = {
-        ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-        ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-      }
+      local original_open_floating_preview = vim.lsp.util.open_floating_preview
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+        opts = opts or {}
+        opts.border = opts.border or 'rounded' -- or "single", "double", "shadow", etc.
+        return original_open_floating_preview(contents, syntax, opts, ...)
+      end
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
