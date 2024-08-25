@@ -94,7 +94,3 @@ set('n', '<leader>\\', '<cmd>:call delete(swapname("."))<cr>', { desc = 'Delete 
 --     vim.lsp.buf.hover()
 --   end
 -- end, { desc = 'Peek fold' })
-
--- Vim Visual Multi
--- set('n', '<C-S-j>', '<C-Down>', { desc = 'Visual-Multy Cursor Down' })
--- set('n', '<C-S-k>', '<C-Up>', { desc = 'Visual-Multy Cursor Up' })
