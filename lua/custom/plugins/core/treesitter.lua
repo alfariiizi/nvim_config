@@ -34,6 +34,8 @@ return {
   config = function(_, opts)
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
+    -- dofile(vim.g.base46_cache .. 'syntax')
+
     ---@diagnostic disable-next-line: missing-fields
     require('nvim-treesitter.configs').setup(opts)
 
@@ -42,6 +44,10 @@ return {
         mdx = 'mdx',
       },
     }
+
+    -- tell treesitter to use the markdown parser for mdx files
+    -- local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
+    -- ft_to_parser.mdx = 'markdown'
 
     -- tell treesitter to use the markdown parser for mdx files
     vim.treesitter.language.register('markdown', 'mdx')

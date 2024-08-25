@@ -18,10 +18,16 @@ set('n', ';;', '``', { noremap = true })
 -- del('n', 'grn') -- rename
 
 -- Diagnostic keymaps
-set('n', '[d', vim.diagnostic.goto_next, { desc = 'Go to previous [D]iagnostic message' })
-set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+set('n', '[d', function()
+  vim.diagnostic.jump { count = -1, float = true }
+end, { desc = 'Go to previous [D]iagnostic message' })
+set('n', ']d', function()
+  vim.diagnostic.jump { count = 1, float = true }
+end, { desc = 'Go to next [D]iagnostic message' })
 set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+set('n', '<leader>uq', '<cmd>q<cr>', { desc = 'Close current window' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -88,3 +94,7 @@ set('n', '<leader>\\', '<cmd>:call delete(swapname("."))<cr>', { desc = 'Delete 
 --     vim.lsp.buf.hover()
 --   end
 -- end, { desc = 'Peek fold' })
+
+-- Vim Visual Multi
+-- set('n', '<C-S-j>', '<C-Down>', { desc = 'Visual-Multy Cursor Down' })
+-- set('n', '<C-S-k>', '<C-Up>', { desc = 'Visual-Multy Cursor Up' })
