@@ -82,13 +82,35 @@ return {
               ['<C-S-v>'] = { '<C-r>+', type = 'command' },
             },
           },
-          -- layout_strategy = 'horizontal',
+          layout_config = {
+            -- prompt_position = 'top',
+            horizontal = {
+              width = 0.9,
+              height = 0.9,
+              preview_cutoff = 120,
+              prompt_position = 'top',
+              preview_width = 0.3,
+            },
+            vertical = {
+              prompt_position = 'top',
+              enable_live_preview = true,
+              preview_cutoff = 10,
+              width_padding = 0.05,
+              height_padding = 1,
+              preview_height = 0.3,
+            },
+          },
+          layout_strategy = 'horizontal',
           -- layout_config = {
-          --   horizontal = {
+          --   vertical = {
           --     prompt_position = 'top',
           --   },
+          --   -- horizontal = {
+          --   --   prompt_position = 'top',
+          --   -- },
           -- },
-          -- sorting_strategy = 'ascending',
+
+          sorting_strategy = 'ascending',
 
           -- configure to use ripgrep
           vimgrep_arguments = {
@@ -219,7 +241,7 @@ return {
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
+          -- winblend = 10,
           previewer = false,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })

@@ -1,13 +1,16 @@
 -- local headlinesFiletype = { 'markdown', 'norg', 'rmd', 'org' }
+local ft = { 'markdown', 'Avante' }
 
 return {
   {
     'MeanderingProgrammer/markdown.nvim',
     name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    ft = ft,
     enabled = true,
     config = function()
       require('render-markdown').setup {
+        file_types = ft,
         heading = {
           -- Turn on / off heading icon & background rendering
           enabled = true,

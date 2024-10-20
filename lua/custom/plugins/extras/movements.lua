@@ -8,20 +8,20 @@ return {
     lazy = false,
     keys = {
       {
-        prefix .. 'c',
+        prefix .. 'f',
         '<cmd>HopChar1AC<CR>',
         mode = 'n',
         desc = 'Hop Word after cursor',
       },
       {
-        prefix .. 'C',
+        prefix .. 'F',
         '<cmd>HopChar1BC<CR>',
         mode = 'n',
         desc = 'Hop Word before cursor',
       },
       {
         prefix .. 'w',
-        '<cmd>HopWord<CR>',
+        '<cmd>HopChar1<CR>',
         mode = 'n',
         desc = 'Hop Word (Anywhere)',
       },
@@ -33,14 +33,16 @@ return {
       },
       {
         prefix .. 'l',
-        '<cmd>HopLineStart<CR>',
-        mode = 'n',
+        '<cmd>HopLine<CR>',
+        mode = { 'n', 'v' },
         desc = 'Hop Line Start',
       },
     },
     opts = {
       -- keys = 'hklyuiopnm,qwertzxcvbasdgjf;',
-      keys = 'etovsqpdygfblzhckixuran',
+      -- keys = 'etovsqpdygfblzhckixuran',
+      keys = 'etovspdfblhckiuran',
+      -- keys = 'fjdkslahg',
     },
     config = function(_, opts)
       local hop = require 'hop'

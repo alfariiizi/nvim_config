@@ -25,6 +25,20 @@ return {
     },
   },
   {
+    'dmmulroy/ts-error-translator.nvim',
+    config = function()
+      require('ts-error-translator').setup {
+        auto_override_publish_diagnostics = true,
+      }
+
+      -- Override ts_ls/vstls error
+      vim.lsp.handlers['textDocument/publishDiagnostics'] = function(err, result, ctx, config)
+        require('ts-error-translator').translate_diagnostics(err, result, ctx, config)
+        vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+      end
+    end,
+  },
+  {
     'pmizio/typescript-tools.nvim',
     enabled = false,
     -- ft = { 'typescript', 'typescriptreact' },

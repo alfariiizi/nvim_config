@@ -278,7 +278,7 @@ return {
             { '<Leader>K', '<plug>(vimtex-doc-package)', desc = 'Vimtex Docs', silent = true },
           },
         },
-        tsserver = {
+        ts_ls = {
           enabled = false,
         },
         vtsls = {
@@ -300,7 +300,7 @@ return {
               experimental = {
                 completion = {
                   enableServerSideFuzzyMatch = true,
-                  entriesLimit = 80,
+                  entriesLimit = 40,
                 },
               },
             },

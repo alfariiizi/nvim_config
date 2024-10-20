@@ -10,7 +10,7 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = '80'
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -92,3 +92,7 @@ vim.o.foldenable = true
 --
 -- -- Set the winbar to use the current file path
 -- vim.o.winbar = '%{%v:lua.GetFormattedFilePath()%}'
+
+-- @source: https://github.com/yetone/avante.nvim
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3

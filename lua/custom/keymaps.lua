@@ -94,3 +94,20 @@ set('n', '<leader>\\', '<cmd>:call delete(swapname("."))<cr>', { desc = 'Delete 
 --     vim.lsp.buf.hover()
 --   end
 -- end, { desc = 'Peek fold' })
+
+-- Function to delete all buffers except the 3 most recent ones
+function DeleteOldBuffers()
+  -- Get a list of buffers sorted by the last access time (most recent first)
+  local buffers = vim.fn.getbufinfo { bufloaded = 1 }
+  table.sort(buffers, function(a, b)
+    return a.lastused > b.lastused
+  end)
+
+  -- Delete all buffers except the first 3 (most recent)
+  for i = 4, #buffers do
+    vim.cmd('Bdelete ' .. buffers[i].bufnr)
+  end
+end
+
+-- Map the function to a command or a keybinding
+vim.api.nvim_set_keymap('n', '<leader>bd', ':lua DeleteOldBuffers()<CR>', { noremap = true, silent = true })
