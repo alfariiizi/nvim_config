@@ -42,6 +42,8 @@ return {
       -- { 'piersolenski/telescope-import.nvim' },
 
       'andrew-george/telescope-themes',
+
+      -- 'nvim-telescope/telescope-file-browser.nvim',
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that

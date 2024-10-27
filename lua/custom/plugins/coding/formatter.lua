@@ -2,8 +2,8 @@ return {
   --NOTE: Autoformat
   {
     'stevearc/conform.nvim',
-    event = { 'LspAttach', 'BufReadPost', 'BufNewFile' },
-    lazy = false,
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
     -- keys = {
     --   {
     --     '<leader>cf',
@@ -15,17 +15,77 @@ return {
     --   },
     -- },
     config = function()
+      vim.lsp.buf.format { async = true }
       local conform = require 'conform'
 
       conform.setup {
         notify_on_error = false,
+        -- format_on_save = function(bufnr)
+        --   -- Disable "format_on_save lsp_fallback" for languages that don't
+        --   -- have a well standardized coding style. You can add additional
+        --   -- languages here or re-enable it for the disabled ones.
+        --   local disable_filetypes = { c = true, cpp = true }
+        --   local lsp_format_opt
+        --   if disable_filetypes[vim.bo[bufnr].filetype] then
+        --     lsp_format_opt = 'never'
+        --   else
+        --     lsp_format_opt = 'fallback'
+        --   end
+        --   return {
+        --     timeout_ms = 3000,
+        --     lsp_format = lsp_format_opt,
+        --   }
+        -- end,
+        format_after_save = {
+          lsp_format = 'fallback',
+          timeout_ms = 500,
+        },
+        -- formatters = {
+        --   prettierd = {
+        --     -- args = function(self, ctx)
+        --     --   -- if vim.endswith(ctx.filename, '.astro') then
+        --     --   --   return {
+        --     --   --     '--stdin-filepath',
+        --     --   --     '$FILENAME',
+        --     --   --     '--plugin',
+        --     --   --     'prettier-plugin-astro',
+        --     --   --   }
+        --     --   -- end
+        --     --   return { '--stdin-filepath', '$FILENAME' }
+        --     -- end,
+        --     command = 'prettierd',
+        --     -- args = { '--stdin-filepath', vim.fn.expand '%:p' },
+        --     args = function()
+        --       local filepath = vim.fn.expand '%:p'
+        --       print '=== FROM prettier ==='
+        --       print('Prettierd file path: ', filepath)
+        --       return { '--stdin-filepath', filepath }
+        --     end,
+        --     stdin = true,
+        --   },
+        --   prettier = {
+        --     command = 'prettierd',
+        --     -- args = { vim.api.nvim_buf_get_name(0) },
+        --     -- args = { '--stdin-filepath', vim.fn.expand '%:p' },
+        --     args = function()
+        --       local filepath = vim.fn.expand '%:p'
+        --       print '=== FROM prettierD ==='
+        --       print('Prettierd file path: ', filepath)
+        --       return { '--stdin-filepath', filepath }
+        --     end,
+        --     stdin = true,
+        --     env = {
+        --       string.format('PRETTIERD_DEFAULT_CONFIG=%s', vim.fn.expand '~/.config/nvim/utils/linter-config/.prettierrc.json'),
+        --     },
+        --   },
+        -- },
         formatters_by_ft = {
           lua = { 'stylua' },
           python = { 'isort', 'black' },
-          javascript = { 'prettierd', 'prettier' },
-          typescript = { 'prettierd', 'prettier' },
-          javascriptreact = { 'prettierd', 'prettier' },
-          typescriptreact = { 'prettierd', 'prettier' },
+          javascript = { 'prettierd', 'prettier', 'eslint_d' },
+          typescript = { 'prettierd', 'prettier', 'eslint_d' },
+          javascriptreact = { 'prettierd', 'prettier', 'eslint_d' },
+          typescriptreact = { 'prettierd', 'prettier', 'eslint_d' },
           svelte = { 'prettierd', 'prettier' },
           css = { 'prettierd', 'prettier' },
           html = { 'prettierd', 'prettier' },
@@ -37,14 +97,9 @@ return {
           tex = { 'latexindent' },
           plaintex = { 'latexindent' },
         },
-        format_on_save = {
-          lsp_fallback = true,
-          async = false,
-          timeout_ms = 3000,
-        },
       }
 
-      conform.format { async = true, lsp_fallback = true }
+      -- conform.format { async = true, lsp_fallback = true }
 
       -- Customise the default "prettier" command to format Markdown files as well
       conform.formatters.prettierd = {
