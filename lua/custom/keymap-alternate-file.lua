@@ -23,7 +23,7 @@ local function should_include_buffer(buf)
 
   -- Define the buffer types and names to exclude
   local exclude_types = { 'terminal', 'help', 'quickfix', 'neo-tree', 'Neotree', 'neotree' }
-  local exclude_names = { '' } -- To exclude unnamed buffers
+  local exclude_names = { 'neo-tree', '' } -- To exclude unnamed buffers
 
   -- Check if the buffer type or name should be excluded
   for _, etype in ipairs(exclude_types) do
@@ -35,6 +35,11 @@ local function should_include_buffer(buf)
     if bufname == ename then
       return false
     end
+  end
+
+  -- Ensure the buffer represents a valid file
+  if bufname == '' or vim.fn.filereadable(bufname) == 0 then
+    return false -- Not a file or unreadable
   end
 
   -- Check if the buffer's file is in the current working directory
@@ -84,5 +89,6 @@ local function switch_to_last_available_buffer()
   end
   print 'No suitable alternate buffer found'
 end
+
 -- Map Ctrl-^ to the new function using Lua
 vim.keymap.set('n', '<leader>,', '', { noremap = true, callback = switch_to_last_available_buffer })

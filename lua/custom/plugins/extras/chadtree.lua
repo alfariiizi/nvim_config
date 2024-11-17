@@ -1,5 +1,6 @@
 return {
   'ms-jpq/chadtree',
+  enabled = false,
   branch = 'chad',
   build = 'python3 -m chadtree deps',
   cmd = 'CHADopen', -- Lazy-load on command
