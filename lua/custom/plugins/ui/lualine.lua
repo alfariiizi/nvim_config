@@ -1,7 +1,10 @@
 return {
   'nvim-lualine/lualine.nvim',
   enabled = true,
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'AndreM222/copilot-lualine',
+  },
   opts = function()
     local colors = {
       blue = '#80a0ff',
@@ -84,7 +87,7 @@ return {
         -- lualine_c = { 'filename' },
         lualine_c = {},
         -- lualine_x = {'encoding', 'fileformat', 'filetype'},
-        lualine_x = { 'filetype' },
+        lualine_x = { 'copilot', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },

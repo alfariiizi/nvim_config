@@ -41,7 +41,6 @@ return {
         },
       },
       'saadparwaiz1/cmp_luasnip',
-
       -- Adds other completion capabilities.
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
@@ -153,6 +152,8 @@ return {
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
+          -- add copilot source
+          -- { name = 'copilot', group_index = 2 },
           { name = 'nvim_lsp', keyword_length = 2, max_item_count = 100 },
           { name = 'luasnip' },
           { name = 'path' },
@@ -169,13 +170,16 @@ return {
           format = function(entry, vim_item)
             local item_with_kind = require('lspkind').cmp_format {
               -- mode = 'symbol', -- show only symbol annotations
-              -- maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+              -- max_width = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
               -- can also be a function to dynamically calculate max width such as
               maxwidth = function()
                 return math.floor(0.45 * vim.o.columns)
               end,
               ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
               show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+              -- symbol_map = {
+              -- Copilot = '',
+              -- },
               -- before = function(entry, vim_item)
               --   -- vim_item.menu = ' ' .. (({ nvim_lsp = 'lsp', cmp_git = 'git' })[entry.source.name] or entry.source.name) .. ': ' .. vim_item.kind
               --   -- vim_item.kind = nil

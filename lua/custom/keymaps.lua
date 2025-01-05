@@ -18,12 +18,14 @@ set('n', ';;', '``', { noremap = true })
 -- del('n', 'grn') -- rename
 
 -- Diagnostic keymaps
-set('n', '[d', function()
-  vim.diagnostic.jump { count = -1, float = true }
-end, { desc = 'Go to previous [D]iagnostic message' })
-set('n', ']d', function()
-  vim.diagnostic.jump { count = 1, float = true }
-end, { desc = 'Go to next [D]iagnostic message' })
+-- set('n', '[d', function()
+--   vim.diagnostic.jump { count = -1, float = true }
+-- end, { desc = 'Go to previous [D]iagnostic message' })
+-- set('n', ']d', function()
+--   vim.diagnostic.jump { count = 1, float = true }
+-- end, { desc = 'Go to next [D]iagnostic message' })
+set('n', ']d', vim.diagnostic.goto_next)
+set('n', '[d', vim.diagnostic.goto_prev)
 set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
