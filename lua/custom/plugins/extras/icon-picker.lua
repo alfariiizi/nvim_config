@@ -4,6 +4,7 @@ local desc_prefix = '[I]con: '
 return {
   'ziontee113/icon-picker.nvim',
   lazy = false,
+  enabled = false,
   keys = {
     { leader .. 'i', mode = { 'n' }, '<cmd>IconPickerNormal<cr>', desc = desc_prefix .. '[I]con Picker' },
     { leader .. 'y', mode = { 'n' }, '<cmd>IconPickerYank<cr>', desc = desc_prefix .. '[Y]nk Selected Icon into Register' },
