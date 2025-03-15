@@ -24,7 +24,7 @@ return {
       preset = 'super-tab',
       ['<M-k>'] = { 'select_prev', 'fallback' },
       ['<M-j>'] = { 'select_next', 'fallback' },
-      ['<Tab>'] = { 'accept', 'fallback' },
+      ['<Tab>'] = { 'accept' },
     },
 
     appearance = {
@@ -35,6 +35,15 @@ return {
       -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- Adjusts spacing to ensure icons are aligned
       nerd_font_variant = 'mono',
+    },
+
+    cmdline = {
+      enabled = true,
+      completion = {
+        menu = {
+          auto_show = true,
+        },
+      },
     },
 
     snippets = {

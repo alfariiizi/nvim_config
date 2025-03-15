@@ -5,21 +5,28 @@ return {
   version = false, -- set this if you want to always pull the latest change
   opts = {
     ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-    provider = 'gemini', -- Recommend using Claude
-    auto_suggestions_provider = 'gemini', -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+    provider = 'openai', -- Recommend using Claude
+    auto_suggestions_provider = 'copilot', -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
     -- claude = {
     --   endpoint = 'https://api.anthropic.com',
     --   model = 'claude-3-5-sonnet-20240620',
     --   temperature = 0,
     --   max_tokens = 4096,
     -- },
-    gemini = {
-      -- @see https://ai.google.dev/gemini-api/docs/models/gemini
-      model = 'gemini-1.5-pro-exp-0827',
-      -- model = "gemini-1.5-flash",
-      temperature = 0,
+    openai = {
+      endpoint = 'https://api.openai.com/v1',
+      model = 'gpt-4o', -- your desired model (or use gpt-4o, etc.)
+      timeout = 30000, -- timeout in milliseconds
+      temperature = 0, -- adjust if needed
       max_tokens = 4096,
     },
+    -- gemini = {
+    --   -- @see https://ai.google.dev/gemini-api/docs/models/gemini
+    --   model = 'gemini-1.5-pro-exp-0827',
+    --   -- model = "gemini-1.5-flash",
+    --   temperature = 0,
+    --   max_tokens = 4096,
+    -- },
     behaviour = {
       auto_suggestions = false, -- Experimental stage
       auto_set_highlight_group = true,
