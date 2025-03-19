@@ -2,6 +2,7 @@
 return {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',
+  enabled = false,
   -- Not works using keys
   -- keys = {
   -- }

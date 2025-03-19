@@ -73,6 +73,7 @@ vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+vim.o.foldmethod = 'indent'
 
 -- [[ Top winbar status line ]]
 -- vim.opt.winbar = '%=%m %f'
@@ -96,3 +97,9 @@ vim.o.foldenable = true
 -- @source: https://github.com/yetone/avante.nvim
 -- views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3
+
+vim.opt_local.cursorcolumn = true -- Highlight the current column
+vim.opt_local.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
+vim.opt_local.softtabstop = 2 -- Number of spaces that a <Tab> counts for while performing editing operations
+vim.opt_local.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
+vim.opt_local.expandtab = true -- Expand tab to 2 spaces

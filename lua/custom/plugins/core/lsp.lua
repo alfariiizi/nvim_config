@@ -1,3 +1,4 @@
+-- local yamlls = require 'lspconfig.configs.yamlls'
 return {
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -113,6 +114,45 @@ return {
         ts_ls = {
           enabled = false,
         },
+        yamlls = {
+          settings = {
+            yaml = {
+              folding = {
+                enable = false,
+              },
+              schemaStore = {
+                enable = true,
+                url = 'https://www.schemastore.org/api/json/catalog.json',
+              },
+              schemas = {
+                kubernetes = 'k8s-*.yaml',
+                ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*',
+                ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
+                ['http://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/**/*.{yml,yaml}',
+                ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
+                ['http://json.schemastore.org/kustomization'] = 'kustomization.{yml,yaml}',
+                ['http://json.schemastore.org/chart'] = 'Chart.{yml,yaml}',
+                ['http://json.schemastore.org/circleciconfig'] = '.circleci/**/*.{yml,yaml}',
+              },
+              validate = true,
+              completion = true,
+              customTags = {
+                '!Ref scalar',
+                '!Sub scalar',
+              },
+            },
+          },
+          handlers = {
+            ['textDocument/foldingRange'] = function()
+              return nil
+            end,
+          },
+        },
+        eslint = {
+          settings = {
+            workingDirectories = { mode = 'auto' },
+          },
+        },
         vtsls = {
           filetypes = {
             'javascript',
@@ -150,11 +190,6 @@ return {
                 propertyDeclarationTypes = { enabled = true },
                 variableTypes = { enabled = false },
               },
-            },
-          },
-          eslint = {
-            settings = {
-              workingDirectories = { mode = 'auto' },
             },
           },
         },

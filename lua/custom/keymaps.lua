@@ -113,3 +113,7 @@ end
 
 -- Map the function to a command or a keybinding
 vim.api.nvim_set_keymap('n', '<leader>bd', ':lua DeleteOldBuffers()<CR>', { noremap = true, silent = true })
+
+-- [[ YAML ]]
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>yt', ':YAMLTelescope<CR>', { noremap = false })
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>yl', ':!yamllint %<CR>', { noremap = true, silent = true })
