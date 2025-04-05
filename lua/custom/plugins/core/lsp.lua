@@ -54,6 +54,14 @@ return {
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
+          -- To activate Inlay Hints
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.server_capabilities.inlayHintProvider then
+            vim.keymap.set('n', '<leader>ui', function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { 0 }, { 0 })
+            end)
+          end
+
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gR', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
@@ -92,6 +100,43 @@ return {
             },
           },
         },
+        gopls = {
+          settings = {
+            gopls = {
+              gofumpt = true,
+              codelenses = {
+                gc_details = false,
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              analyses = {
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
+              },
+              usePlaceholders = false,
+              completeUnimported = true,
+              staticcheck = true,
+              directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
+              semanticTokens = true,
+            },
+          },
+        },
         jsonls = {
           on_new_config = function(new_config)
             new_config.settings.json.schemas = new_config.settings.json.schemas or {}
@@ -117,15 +162,12 @@ return {
         yamlls = {
           settings = {
             yaml = {
-              folding = {
-                enable = false,
-              },
               schemaStore = {
                 enable = true,
                 url = 'https://www.schemastore.org/api/json/catalog.json',
               },
               schemas = {
-                kubernetes = 'k8s-*.yaml',
+                kubernetes = '*.yaml',
                 ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*',
                 ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
                 ['http://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/**/*.{yml,yaml}',
@@ -141,11 +183,6 @@ return {
                 '!Sub scalar',
               },
             },
-          },
-          handlers = {
-            ['textDocument/foldingRange'] = function()
-              return nil
-            end,
           },
         },
         eslint = {
@@ -207,6 +244,13 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua',
+
+        -- Go tools
+        'goimports',
+        'gofumpt',
+        'gomodifytags',
+        'impl',
+        'delve',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

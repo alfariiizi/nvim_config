@@ -96,6 +96,7 @@ return {
           graphql = { 'prettierd', 'prettier' },
           tex = { 'latexindent' },
           plaintex = { 'latexindent' },
+          go = { 'goimports', 'gofumpt' },
         },
       }
 

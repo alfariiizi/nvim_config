@@ -1,4 +1,6 @@
 --NOTE: Fold
+--WARNING: This makes editing kubernetes yaml file to have error.
+-- Using the default fold method is enough for me.
 return {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',

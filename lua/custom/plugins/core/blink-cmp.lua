@@ -21,10 +21,16 @@ return {
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = {
-      preset = 'super-tab',
+      -- preset = 'super-tab',
       ['<M-k>'] = { 'select_prev', 'fallback' },
       ['<M-j>'] = { 'select_next', 'fallback' },
       ['<Tab>'] = { 'accept' },
+    },
+
+    completion = {
+      trigger = {
+        show_in_snippet = false,
+      },
     },
 
     appearance = {
@@ -44,11 +50,26 @@ return {
           auto_show = true,
         },
       },
+      keymap = {
+        ['<Tab>'] = { 'select_and_accept' },
+        ['<M-j>'] = { 'select_next', 'fallback' },
+        ['<M-k>'] = { 'select_prev', 'fallback' },
+      },
     },
 
     snippets = {
       expand = function(snippet)
-        require('luasnip').lsp_expand(snippet)
+        local ls = require 'luasnip'
+        ls.lsp_expand(snippet)
+        local s = ls.snippet
+        local t = ls.text_node
+
+        -- For golang
+        ls.add_snippets('go', {
+          s('ifer', {
+            t { 'if err != nil {', '\treturn err', '}' },
+          }),
+        })
       end,
       active = function(filter)
         if filter and filter.direction then
