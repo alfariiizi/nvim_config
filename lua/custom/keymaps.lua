@@ -117,3 +117,34 @@ vim.api.nvim_set_keymap('n', '<leader>bd', ':lua DeleteOldBuffers()<CR>', { nore
 -- [[ YAML ]]
 vim.api.nvim_buf_set_keymap(0, 'n', '<leader>yt', ':YAMLTelescope<CR>', { noremap = false })
 vim.api.nvim_buf_set_keymap(0, 'n', '<leader>yl', ':!yamllint %<CR>', { noremap = true, silent = true })
+
+-- [[ Kubernetes ]]
+vim.keymap.set('n', '<leader>ks', function()
+  -- Save the file first
+  vim.cmd 'write'
+
+  local input_file = vim.fn.expand '%:p'
+  local input_name = vim.fn.expand '%:t:r' -- filename without extension
+  local input_dir = vim.fn.expand '%:p:h'
+
+  -- Get timestamp
+  local timestamp = os.date '%Y%m%dT%H%M%S'
+
+  -- Output filename: same folder, with timestamp suffix
+  local sealed_file = string.format('%s/sealed-%s-%s.yaml', input_dir, input_name, timestamp)
+
+  local cmd = string.format('kubeseal --format=yaml -o yaml -f %s > %s', input_file, sealed_file)
+
+  vim.fn.jobstart(cmd, {
+    stdout_buffered = true,
+    stderr_buffered = true,
+    on_exit = function(_, code, _)
+      if code == 0 then
+        vim.cmd('edit ' .. sealed_file)
+        vim.notify('✅ Sealed: ' .. sealed_file, vim.log.levels.INFO)
+      else
+        vim.notify('❌ Failed to seal secret', vim.log.levels.ERROR)
+      end
+    end,
+  })
+end, { desc = 'k8s: Seal Kubernetes Secret' })
