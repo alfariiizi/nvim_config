@@ -12,6 +12,7 @@ return {
         javascriptreact = { 'eslint_d', 'eslint' },
         typescriptreact = { 'eslint_d', 'eslint' },
         svelte = { 'eslint_d', 'eslint' },
+        php = {},
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

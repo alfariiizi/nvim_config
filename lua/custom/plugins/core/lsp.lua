@@ -100,6 +100,14 @@ return {
             },
           },
         },
+        ruff = {
+          cmd_env = { RUFF_TRACE = 'messages' },
+          init_options = {
+            settings = {
+              logLevel = 'error',
+            },
+          },
+        },
         gopls = {
           settings = {
             gopls = {
@@ -189,6 +197,9 @@ return {
           settings = {
             workingDirectories = { mode = 'auto' },
           },
+        },
+        intelephense = {
+          enabled = true,
         },
         vtsls = {
           filetypes = {

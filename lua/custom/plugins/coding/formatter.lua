@@ -97,6 +97,7 @@ return {
           tex = { 'latexindent' },
           plaintex = { 'latexindent' },
           go = { 'goimports', 'gofumpt' },
+          php = { 'pint', 'php_cs_fixer' },
         },
       }
 
